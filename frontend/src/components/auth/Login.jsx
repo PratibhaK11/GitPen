@@ -5,7 +5,7 @@ import { Container, Card, Form, Button } from 'react-bootstrap';
 import logo from "../../assets/github-mark-white.svg";
 import { Link } from "react-router-dom";
 import './auth.css'; // Make sure this CSS file includes custom styles
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +16,7 @@ const Login = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:3002/login", {
+      const res = await axios.post(`${API_BASE_URL}/login`, {
         email,
         password,
       });
@@ -37,7 +37,6 @@ const Login = () => {
     <Container fluid className="d-flex justify-content-center align-items-center min-vh-100">
       <Card className="p-4 shadow-sm" style={{ maxWidth: '400px', width: '100%' }}>
         <div className="text-center mb-4">
-          <img src={logo} alt="Logo" className="mb-3" style={{ width: '60px' }} />
           <h3>Sign In</h3>
         </div>
         <Form onSubmit={handleLogin}>
