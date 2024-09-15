@@ -25,7 +25,7 @@ const Login = () => {
       localStorage.setItem("userId", res.data.userId);
       setCurrentUser(res.data.userId);
       setLoading(false);
-      window.location.href = "/";
+      window.location.href = `${API_BASE_URL}/login`;
     } catch (err) {
       console.error(err);
       alert("Login Failed!");
