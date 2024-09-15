@@ -8,12 +8,6 @@ const NavBar = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="navbar">
       <Navbar.Brand as={Link} to="/">
-        <img
-          src="https://www.github.com/images/modules/logos_page/GitHub-Mark.png"
-          alt="GitPen Logo"
-          className="d-inline-block align-top"
-          height="50"
-        />
         <span className="ms-2">GitPen</span>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
