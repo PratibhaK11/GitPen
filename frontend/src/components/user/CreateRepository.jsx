@@ -17,7 +17,7 @@ const CreateRepo = () => {
     const owner = localStorage.getItem('userId'); // Retrieve user ID from localStorage
 
     try {
-      const response = await axios.post('${API_BASE_URL}/repo/create', {
+      const response = await axios.post(`${API_BASE_URL}/repo/create`, {
         owner,
         name,
         description,
