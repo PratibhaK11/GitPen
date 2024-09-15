@@ -19,7 +19,7 @@ const { revertRepo } = require("./controllers/revert");
 const Repository = require("./models/repoModel");
 const { loginRepo } = require('./controllers/loginRepo');
 dotenv.config();
-
+app.use(cors({ origin: "*" }));
 yargs(hideBin(process.argv))
   .command("start", "Starts a new server", {}, startServer)
   .command("init", "Initialise a new repository", {}, initRepo)
@@ -120,7 +120,7 @@ function startServer() {
     .then(() => console.log("MongoDB connected!"))
     .catch((err) => console.error("Unable to connect : ", err));
 
-  app.use(cors({ origin: "*" }));
+  
 
   app.use("/", mainRouter);
   //app.use("/", issueRouter);
