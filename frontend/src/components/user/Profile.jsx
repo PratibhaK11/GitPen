@@ -72,7 +72,7 @@ const Profile = () => {
           localStorage.removeItem("userId");
           setCurrentUser(null);
 
-          window.location.href = "/auth";
+          window.location.href = "/";
         }}
         style={{ position: "fixed", bottom: "50px", right: "50px" }}
         id="logout"

@@ -39,7 +39,7 @@ const Signup = () => {
     <Container fluid className="d-flex justify-content-center align-items-center min-vh-100">
       <Card className="p-4 shadow-sm" style={{ maxWidth: '400px', width: '100%' }}>
         <div className="text-center mb-4">
-          <img src={logo} alt="Logo" className="mb-3" style={{ width: '60px' }} />
+          
           <h3>Sign Up</h3>
         </div>
         <Form onSubmit={handleSignup}>

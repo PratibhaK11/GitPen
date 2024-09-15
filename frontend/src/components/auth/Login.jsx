@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../../authContext";
 import { Container, Card, Form, Button } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import logo from "../../assets/github-mark-white.svg";
 import { Link } from "react-router-dom";
 import './auth.css'; // Make sure this CSS file includes custom styles
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { setCurrentUser } = useAuth();
+  const navigate = useNavigate(); // Initialize navigate
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,7 +29,7 @@ const Login = () => {
       localStorage.setItem("userId", res.data.userId);
       setCurrentUser(res.data.userId);
       setLoading(false);
-      window.location.href = `${API_BASE_URL}/login`;
+      navigate("/"); // Use navigate instead of window.location.href
     } catch (err) {
       console.error(err);
       alert("Login Failed!");
