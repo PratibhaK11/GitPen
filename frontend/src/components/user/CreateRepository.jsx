@@ -3,7 +3,7 @@ import './CreateRepository.css';
 import Navbar from '../Navbar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const CreateRepo = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -17,7 +17,7 @@ const CreateRepo = () => {
     const owner = localStorage.getItem('userId'); // Retrieve user ID from localStorage
 
     try {
-      const response = await axios.post('http://localhost:3002/repo/create', {
+      const response = await axios.post('${API_BASE_URL}/repo/create', {
         owner,
         name,
         description,

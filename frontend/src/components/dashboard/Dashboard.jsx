@@ -13,14 +13,14 @@ const Dashboard = () => {
   const [updateName, setUpdateName] = useState("");
   const [updateDescription, setUpdateDescription] = useState("");
   const navigate = useNavigate();
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   useEffect(() => {
     const userId = localStorage.getItem("userId");
 
     const fetchRepositories = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3002/repo/user/${userId}`
+          `${API_BASE_URL}/repo/user/${userId}`
         );
         if (!response.ok) {
           throw new Error("Error fetching repositories");
@@ -35,7 +35,7 @@ const Dashboard = () => {
 
     const fetchSuggestedRepositories = async () => {
       try {
-        const response = await fetch(`http://localhost:3002/repo/all`);
+        const response = await fetch(`${API_BASE_URL}/repo/all`);
         if (!response.ok) {
           throw new Error("Error fetching suggested repositories");
         }
@@ -69,7 +69,7 @@ const Dashboard = () => {
   const handleUpdate = async () => {
     if (repoToUpdate) {
       try {
-        const response = await fetch(`http://localhost:3002/repo/update/${repoToUpdate}`, {
+        const response = await fetch(`${API_BASE_URL}/repo/update/${repoToUpdate}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -99,7 +99,7 @@ const Dashboard = () => {
 
   const handleDelete = async (repoId) => {
     try {
-      const response = await fetch(`http://localhost:3002/repo/delete/${repoId}`, {
+      const response = await fetch(`${API_BASE_URL}/repo/delete/${repoId}`, {
         method: "DELETE",
       });
       if (!response.ok) {

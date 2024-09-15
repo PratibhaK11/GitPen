@@ -7,7 +7,7 @@ import { UnderlineNav } from "@primer/react";
 import { BookIcon, RepoIcon } from "@primer/octicons-react";
 import HeatMapProfile from "./HeatMap";
 import { useAuth } from "../../authContext";
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const Profile = () => {
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({ username: "username" });
@@ -20,7 +20,7 @@ const Profile = () => {
       if (userId) {
         try {
           const response = await axios.get(
-            `http://localhost:3002/userProfile/${userId}`
+            `${API_BASE_URL}/userProfile/${userId}`
           );
           setUserDetails(response.data);
         } catch (err) {
