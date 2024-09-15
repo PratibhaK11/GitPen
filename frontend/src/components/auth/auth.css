@@ -6,7 +6,9 @@ body {
   .card {
     border-radius: 10px;
   }
-  
+  h3{
+    color: white;
+  }
   .card-body {
     padding: 2rem;
   }
