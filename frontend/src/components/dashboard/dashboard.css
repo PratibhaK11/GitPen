@@ -1,0 +1,168 @@
+/* General styles for the Dashboard */
+body {
+  background-color: #0f0f0f; /* Dark background for the entire page */
+  color: #ffffff; /* Default text color in white */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  
+  height: 100%;
+}
+.no-scrollbar {
+  overflow: hidden;
+}
+#dashboard {
+  display: flex;
+  height: calc(100vh - 60px); /* Adjust height as needed */
+  padding: 20px;
+  box-sizing: border-box;
+  gap: 20px; /* Space between columns */
+}
+
+/* Sidebar styling for Suggested Repositories and Upcoming Events */
+aside {
+  flex: 1;
+  background-color: #1e1e1e; /* Slightly lighter than the body background */
+  border-radius: 12px; /* Rounded corners for a modern look */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  height: calc(100% - 30px); /* Adjust height based on padding */
+  overflow-y: auto; /* Scroll if content exceeds height */
+}
+.modal-content{
+  background-color: black;
+}
+.suggested-repositories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  overflow: hidden; /* Hide scrollbars */
+  height: auto;
+}
+
+.upcoming-events {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden; /* Hide scrollbars */
+  height: auto;
+}
+
+.card {
+  background-color: transparent;
+}
+
+.card-title {
+  color: orangered;
+}
+
+/* Styling for text-only content */
+aside h5 {
+  color: #ffffff; /* White text for headings */
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+aside p, aside ul li {
+  color: #ffffff; /* White text for paragraphs and list items */
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+/* Remove additional styling and borders from sections */
+aside div {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* Main content styling for User Repositories */
+main {
+  flex: 2;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  overflow-y: auto; /* Scroll if content exceeds height */
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #ffffff; /* White text for main headings */
+  margin-bottom: 20px;
+}
+.card-subtitle{
+  color: white;
+}
+/* Search box styling */
+.search-box input {
+  background-color: #2c2c2c;
+  border: 1px solid #3a3a3a;
+  color: #ffffff; /* White text in the search box */
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Placeholder text color in search box */
+.search-box input::placeholder {
+  color: orangered; /* Orangered placeholder text */
+}
+
+/* Repository item styles */
+.repo-item {
+  background-color: #2c2c2c;
+  border: 1px solid #3a3a3a;
+  width: max-content;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  color: #ffffff; /* White text for repository items */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.repo-item:hover {
+  background-color: #3a3a3a;
+  transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+/* Upcoming events styling */
+.upcoming-events ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.user-repositories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upcoming-events ul li {
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  margin-bottom: 10px;
+  color: #ffffff; /* White text for upcoming events */
+  transition: background-color 0.3s ease;
+}
+
+/* Responsive design for smaller screens */
+@media screen and (max-width: 768px) {
+  #dashboard {
+    flex-direction: column;
+  }
+
+  aside, main {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  aside:last-of-type {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,23 @@
+/* navbar.css */
+
+.navbar {
+  border-bottom: 2px solid white;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  border-radius: 50%;
+}
+
+.navbar-nav .nav-link {
+  font-weight: bold;
+  color: white !important;
+}
+
+.navbar-nav .nav-link:hover {
+  text-decoration: underline;
+}
