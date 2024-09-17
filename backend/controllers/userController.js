@@ -2,6 +2,9 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { MongoClient } = require("mongodb");
 const dotenv = require("dotenv");
+const multer = require('multer');
+const upload = require('../config/multerConfig'); 
+const cloudinary = require('../config/cloudinaryConfig'); 
 var ObjectId = require("mongodb").ObjectId;
 
 dotenv.config();
@@ -23,7 +26,7 @@ async function signup(req, res) {
   const { username, password, email } = req.body;
   try {
     await connectClient();
-    const db = client.db(); // Use DB from MONGODB_URI
+    const db = client.db();
     const usersCollection = db.collection("users");
 
     const user = await usersCollection.findOne({ username });
@@ -45,7 +48,6 @@ async function signup(req, res) {
 
     const result = await usersCollection.insertOne(newUser);
 
-    // Use result.insertedId instead of result.insertId
     const token = jwt.sign(
       { id: result.insertedId },
       process.env.JWT_SECRET_KEY,
@@ -53,7 +55,7 @@ async function signup(req, res) {
     );
     res.json({ token, userId: result.insertedId });
   } catch (err) {
-    console.error("Error during signup : ", err.message);
+    console.error("Error during signup: ", err.message);
     res.status(500).send("Server error");
   }
 }
@@ -62,7 +64,7 @@ async function login(req, res) {
   const { email, password } = req.body;
   try {
     await connectClient();
-    const db = client.db(); // Use DB from MONGODB_URI
+    const db = client.db();
     const usersCollection = db.collection("users");
 
     const user = await usersCollection.findOne({ email });
@@ -80,7 +82,7 @@ async function login(req, res) {
     });
     res.json({ token, userId: user._id });
   } catch (err) {
-    console.error("Error during login : ", err.message);
+    console.error("Error during login: ", err.message);
     res.status(500).send("Server error!");
   }
 }
@@ -88,13 +90,13 @@ async function login(req, res) {
 async function getAllUsers(req, res) {
   try {
     await connectClient();
-    const db = client.db(); // Use DB from MONGODB_URI
+    const db = client.db();
     const usersCollection = db.collection("users");
 
     const users = await usersCollection.find({}).toArray();
     res.json(users);
   } catch (err) {
-    console.error("Error during fetching : ", err.message);
+    console.error("Error during fetching: ", err.message);
     res.status(500).send("Server error!");
   }
 }
@@ -102,14 +104,13 @@ async function getAllUsers(req, res) {
 async function getUserProfile(req, res) {
   const currentID = req.params.id;
 
-  // Validate ObjectId
   if (!ObjectId.isValid(currentID)) {
     return res.status(400).json({ message: "Invalid user ID!" });
   }
 
   try {
     await connectClient();
-    const db = client.db(); // Use DB from MONGODB_URI
+    const db = client.db();
     const usersCollection = db.collection("users");
 
     const user = await usersCollection.findOne({
@@ -122,7 +123,7 @@ async function getUserProfile(req, res) {
 
     res.send(user);
   } catch (err) {
-    console.error("Error during fetching : ", err.message);
+    console.error("Error during fetching: ", err.message);
     res.status(500).send("Server error!");
   }
 }
@@ -130,66 +131,77 @@ async function getUserProfile(req, res) {
 async function updateUserProfile(req, res) {
   const currentID = req.params.id;
   const { email, password } = req.body;
+  const profilePic = req.file;
 
-  // Validate ObjectId
   if (!ObjectId.isValid(currentID)) {
     return res.status(400).json({ message: "Invalid user ID!" });
   }
 
   try {
     await connectClient();
-    const db = client.db(); // Use DB from MONGODB_URI
+    const db = client.db();
     const usersCollection = db.collection("users");
 
     let updateFields = { email };
+
     if (password) {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
       updateFields.password = hashedPassword;
     }
 
+    if (profilePic) {
+      // Upload the file to Cloudinary
+      const result = await cloudinary.uploader.upload(profilePic.path, {
+        folder: 'profile_pictures',
+        allowed_formats: ['jpg', 'jpeg', 'png'],
+      });
+
+      // Use the Cloudinary URL
+      updateFields.profilePicUrl = result.secure_url;
+    }
+
     const result = await usersCollection.findOneAndUpdate(
-      {
-        _id: new ObjectId(currentID),
-      },
+      { _id: new ObjectId(currentID) },
       { $set: updateFields },
       { returnDocument: "after" }
     );
+
     if (!result.value) {
       return res.status(404).json({ message: "User not found!" });
     }
 
     res.send(result.value);
   } catch (err) {
-    console.error("Error during updating : ", err.message);
+    console.error("Error during updating: ", err.message);
     res.status(500).send("Server error!");
   }
 }
 
+
 async function deleteUserProfile(req, res) {
   const currentID = req.params.id;
 
-  // Validate ObjectId
   if (!ObjectId.isValid(currentID)) {
     return res.status(400).json({ message: "Invalid user ID!" });
   }
 
   try {
     await connectClient();
-    const db = client.db(); // Use DB from MONGODB_URI
+    const db = client.db();
     const usersCollection = db.collection("users");
 
     const result = await usersCollection.deleteOne({
       _id: new ObjectId(currentID),
     });
 
-    if (result.deletedCount == 0) {
+    if (result.deletedCount === 0) {
       return res.status(404).json({ message: "User not found!" });
     }
 
     res.json({ message: "User Profile Deleted!" });
   } catch (err) {
-    console.error("Error during updating : ", err.message);
+    console.error("Error during deletion: ", err.message);
     res.status(500).send("Server error!");
   }
 }
