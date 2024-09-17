@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./navbar.css";
+import axios from "axios";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3002';
 
 const NavBar = () => {
+  const [profilePicUrl, setProfilePicUrl] = useState('');
+
+  useEffect(() => {
+    const fetchUserProfilePic = async () => {
+      const userId = localStorage.getItem("userId");
+
+      if (userId) {
+        try {
+          const response = await axios.get(`${API_BASE_URL}/userProfile/${userId}`);
+          setProfilePicUrl(response.data.profilePicUrl || '/path/to/default/profile.png');
+        } catch (err) {
+          console.error("Error fetching user profile picture:", err);
+          setProfilePicUrl('/path/to/default/profile.png'); // Fallback image
+        }
+      }
+    };
+
+    fetchUserProfilePic();
+  }, []);
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="navbar">
       <Navbar.Brand as={Link} to="/">
@@ -17,7 +40,11 @@ const NavBar = () => {
             Create a Repository
           </Nav.Link>
           <Nav.Link as={Link} to="/profile">
-            Profile
+            <img
+              src={profilePicUrl}
+              alt="Profile"
+              className="profile-pic"
+            />
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>

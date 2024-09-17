@@ -7,7 +7,7 @@ import logo from "../../assets/github-mark-white.svg";
 import { Link } from "react-router-dom";
 import './auth.css'; // Make sure this CSS file includes custom styles
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3002';
 
 const Login = () => {
   const [email, setEmail] = useState("");

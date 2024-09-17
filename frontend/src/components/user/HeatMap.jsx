@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import HeatMap from "@uiw/react-heat-map";
-import axios from "axios";  // Import axios for API requests
+import axios from "axios";
 
 const getPanelColors = (maxCount) => {
   const colors = {};
@@ -11,18 +11,28 @@ const getPanelColors = (maxCount) => {
   return colors;
 };
 
-const HeatMapProfile = ({ repoId }) => {
+const HeatMapProfile = ({ userId }) => {
   const [activityData, setActivityData] = useState([]);
   const [panelColors, setPanelColors] = useState({});
 
   useEffect(() => {
+    console.log("userId:", userId); // Log the userId
+
+    if (!userId) {
+      console.error("userId is missing");
+      return;
+    }
+
     const fetchCommitData = async () => {
       try {
-        const response = await axios.get(`/commitCounts/${repoId}`);
+        const response = await axios.get(`http://localhost:3002/commitCounts/user/${userId}`);
+        console.log("API Response:", response.data); // Log the API response
+
         const data = response.data.map(commit => ({
           date: commit._id,
           count: commit.count
         }));
+
         setActivityData(data);
 
         const maxCount = Math.max(...data.map(d => d.count));
@@ -33,7 +43,7 @@ const HeatMapProfile = ({ repoId }) => {
     };
 
     fetchCommitData();
-  }, [repoId]);
+  }, [userId]);
 
   return (
     <div>

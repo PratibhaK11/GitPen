@@ -5,14 +5,14 @@ import { Container, Card, Form, Button } from 'react-bootstrap';
 import logo from "../../assets/github-mark-white.svg";
 import { Link } from "react-router-dom";
 import './auth.css'; // Make sure this CSS file includes custom styles
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3002';
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { setCurrentUser } = useAuth();
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+ 
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
