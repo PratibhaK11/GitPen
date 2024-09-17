@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import HeatMap from "@uiw/react-heat-map";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const getPanelColors = (maxCount) => {
   const colors = {};
   for (let i = 0; i <= maxCount; i++) {
@@ -25,7 +27,7 @@ const HeatMapProfile = ({ userId }) => {
 
     const fetchCommitData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3002/commitCounts/user/${userId}`);
+        const response = await axios.get(`${API_BASE_URL}/commitCounts/user/${userId}`);
         console.log("API Response:", response.data); // Log the API response
 
         const data = response.data.map(commit => ({
