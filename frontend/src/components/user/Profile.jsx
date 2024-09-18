@@ -98,7 +98,7 @@ const Profile = () => {
           Overview
         </UnderlineNav.Item>
 
-        <UnderlineNav.Item
+        {/* <UnderlineNav.Item
           onClick={() => navigate("/repo")}
           icon={RepoIcon}
           sx={{
@@ -111,7 +111,7 @@ const Profile = () => {
           }}
         >
           Starred Repositories
-        </UnderlineNav.Item>
+        </UnderlineNav.Item> */}
       </UnderlineNav>
 
       <button

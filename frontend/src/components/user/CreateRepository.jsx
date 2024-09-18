@@ -37,8 +37,11 @@ const CreateRepo = () => {
 
   return (
     <div className="create-repo-container">
-     
       <div className="form1">
+        {/* Close icon (Bootstrap) */}
+        <div className="close-icon" onClick={() => navigate(-1)}>
+          <i className="bi bi-x-lg"></i>
+        </div>
         <h1>Create Repository</h1>
         <input
           type="text"
@@ -58,7 +61,7 @@ const CreateRepo = () => {
           placeholder="Enter initial content (optional)"
         />
         <label>
-          Visibility:
+          Public
           <input
             type="checkbox"
             checked={visibility}
