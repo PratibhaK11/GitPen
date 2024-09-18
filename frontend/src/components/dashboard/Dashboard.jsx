@@ -131,9 +131,9 @@ const Dashboard = () => {
       <section id="dashboard" className="container my-4">
         {/* Suggested Repositories Section */}
         <aside className="suggested-repositories">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Suggested Repositories</h5>
+          <div >
+            <div >
+              <h5 >Suggested Repositories</h5>
               {suggestedRepositories.length > 0 ? (
                 suggestedRepositories.map((repo) => (
                   <div
@@ -142,10 +142,10 @@ const Dashboard = () => {
                     className="repo-item"
                     style={{ cursor: "pointer" }}  // Ensure it's clickable
                   >
-                    <h6 className="card-subtitle mb-2 text-muted">
+                    <p>
                       {repo.name}
-                    </h6>
-                    <p className="card-text">{repo.description}</p>
+                    </p>
+                    
                   </div>
                 ))
               ) : (

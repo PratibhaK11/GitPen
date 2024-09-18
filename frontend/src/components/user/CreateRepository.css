@@ -1,42 +1,74 @@
-#create-repository {
-    padding: 20px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    max-width: 600px;
-    margin: auto;
-  }
-  
-  label {
-    margin-top: 10px;
-  }
-  
-  input, textarea, select {
-    margin-top: 5px;
-    padding: 8px;
-    width: 100%;
-  }
-  
-  button {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  .error {
-    color: red;
-  }
-  
-  .success {
-    color: green;
-  }
-  
+/* Apply a full height and centered flexbox container to center the form */
+.create-repo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ensure the container takes up the full height of the viewport */
+  background-color: #020202; /* Optional: Light background color */
+}
+
+/* Centering the form and adding some padding and shadow */
+.form1 {
+  background: rgb(0, 0, 0);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 600px; /* Adjust the max-width as needed */
+  width: 100%;
+}
+
+/* Form elements styling */
+.form1 h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: whitesmoke;
+}
+
+.form1 input[type="text"],
+.form1 textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form1 textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.form1 label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form1 .visibility-checkbox {
+  margin-left: 10px;
+}
+
+.form1 button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.form1 button:hover {
+  background-color: #0056b3;
+}
+
+.form1 .error-message {
+  color: red;
+  font-size: 14px;
+}
+
+.form1 .success-message {
+  color: green;
+  font-size: 14px;
+}

@@ -31,7 +31,9 @@ aside {
 }
 .modal-content{
   background-color: black;
+  color: whitesmoke;
 }
+
 .suggested-repositories {
   display: flex;
   flex-direction: column;
@@ -114,8 +116,6 @@ h2 {
 
 /* Repository item styles */
 .repo-item {
-  background-color: #2c2c2c;
-  border: 1px solid #3a3a3a;
   width: max-content;
   border-radius: 8px;
   padding: 15px;
