@@ -1,5 +1,7 @@
 /* navbar.css */
 
+/* Existing styles */
+
 .navbar {
   border-bottom: 2px solid white;
 }
@@ -8,6 +10,7 @@
   display: flex;
   align-items: center;
 }
+
 .profile-pic {
   width: 40px; 
   height: 40px;
@@ -27,6 +30,7 @@
 .navbar-nav .nav-link:hover {
   text-decoration: underline;
 }
+
 .nav-item-wrapper {
   display: flex;
   align-items: center;
@@ -53,7 +57,6 @@
 
 .create-repo-text {
   display: none;
-  
   left: 25px; 
   background-color: #343a40; 
   color: white;
@@ -66,3 +69,46 @@
   display: block;
 }
 
+/* New modal styles */
+
+.modal-content {
+  background-color: #343a40; /* Dark background color */
+  color: white; /* Text color for better visibility */
+  border-radius: 8px; /* Rounded corners */
+}
+
+.modal-header {
+  border-bottom: 1px solid #495057; /* Lighter border color for header */
+}
+
+.modal-title {
+  color: #ffffff; /* Title text color */
+}
+
+.modal-body {
+  color: #e9ecef; /* Light color for body text */
+}
+
+.modal-footer {
+  border-top: 1px solid #495057; /* Lighter border color for footer */
+}
+
+.modal-footer .btn-secondary {
+  background-color: #6c757d; /* Custom background color for the close button */
+  border: none; /* Remove border */
+}
+
+.modal-footer .btn-secondary:hover {
+  background-color: #5a6268; /* Darker background color on hover */
+}
+
+pre {
+  background-color: #495057; /* Darker background for code blocks */
+  color: #e9ecef; /* Light color for code text */
+  padding: 10px; /* Padding around code blocks */
+  border-radius: 4px; /* Rounded corners */
+}
+
+code {
+  color: #e9ecef; /* Light color for code text */
+}
